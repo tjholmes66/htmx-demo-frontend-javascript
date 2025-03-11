@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles/form_style.css">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form id="company-form">
+
+    <div class="fs-field">
+        <label class="fs-label" for="companyCode">Company Code</label>
+        <input class="fs-input" id="companyCode" name="companyCode" required />
+    </div>
+    <div class="fs-field">
+        <label class="fs-label" for="companyName">Company Name</label>
+        <input class="fs-input" id="companyName" name="companyName" required />
+    </div>
+    <div class="fs-field">
+        <label class="fs-label" for="description">Message</label>
+        <textarea
+                class="fs-textarea"
+                id="description"
+                name="description"
+                required
+        ></textarea>
+        <p class="fs-description">... description ...</p>
+    </div>
+
+    <div class="fs-field">
+        <label class="fs-label" for="address1">Address 1</label>
+        <input class="fs-input" id="address1" name="address1" required />
+    </div>
+    <div class="fs-field">
+        <label class="fs-label" for="address2">Address 2</label>
+        <input class="fs-input" id="address2" name="address2"  />
+    </div>
+    <div class="fs-field">
+        <label class="fs-label" for="city">City</label>
+        <input class="fs-input" id="city" name="city" required />
+    </div>
+
+    <div class="fs-field">
+        <label class="fs-label">State</label>
+
+        <select name="state" class="form-control selectpicker" >
+            <option value=" " >Please select your state</option>
+            <option>Alabama</option>
+            <option>Alaska</option>
+            <option >Arizona</option>
+            <option >Arkansas</option>
+            <option >California</option>
+            <option >Colorado</option>
+            <option >Connecticut</option>
+            <option >Delaware</option>
+            <option >District of Columbia</option>
+            <option> Florida</option>
+            <option >Georgia</option>
+            <option >Hawaii</option>
+            <option >daho</option>
+            <option >Illinois</option>
+            <option >Indiana</option>
+            <option >Iowa</option>
+            <option> Kansas</option>
+            <option >Kentucky</option>
+            <option >Louisiana</option>
+            <option>Maine</option>
+            <option >Maryland</option>
+            <option> Massachusetts</option>
+            <option >Michigan</option>
+            <option >Minnesota</option>
+            <option>Mississippi</option>
+            <option>Missouri</option>
+            <option>Montana</option>
+            <option>Nebraska</option>
+            <option>Nevada</option>
+            <option>New Hampshire</option>
+            <option>New Jersey</option>
+            <option>New Mexico</option>
+            <option>New York</option>
+            <option>North Carolina</option>
+            <option>North Dakota</option>
+            <option>Ohio</option>
+            <option>Oklahoma</option>
+            <option>Oregon</option>
+            <option>Pennsylvania</option>
+            <option>Rhode Island</option>
+            <option>South Carolina</option>
+            <option>South Dakota</option>
+            <option>Tennessee</option>
+            <option>Texas</option>
+            <option>Utah</option>
+            <option>Vermont</option>
+            <option>Virginia</option>
+            <option >Washington</option>
+            <option >West Virginia</option>
+            <option>Wisconsin</option>
+            <option >Wyoming</option>
+        </select>
+
+    </div>
+
+    <div class="fs-field">
+        <label class="fs-label" for="zip">ZipCode</label>
+        <input class="fs-input" id="zip" name="zip" required />
+    </div>
+
+    <div class="fs-field">
+        <label class="fs-label" for="active">Active</label>
+        <input type="fs-checkbox" name="active" class="inline checkbox" id="active" value="false">
+    </div>
+
+    <div class="fs-button-group">
+        <button class="fs-button" type="submit">Submit</button>
+    </div>
+</form>
+
+<script>
+    const form = document.getElementById('company-form');
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+
+        try {
+            const response = await fetch('http://localhost:8080/rest/companys/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            console.log('Success:', result);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+</script>
+</body>
+</html>

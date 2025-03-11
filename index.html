@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/styles/main_style.css">
+    <title>HTMX Demo Javascript Web-App</title>
+</head>
+<body class="Site">
+
+<div id="container">
+    <script>
+        if (get_cookie("cookiename") == null){
+            console.log("[cookie exists message]")
+        } else {
+            console.log("[cookie DOES NOT exists message]")
+        }
+
+        // taken from http://www.elated.com/articles/javascript-and-cookies/
+        function get_cookie ( cookie_name ){
+            var results = document.cookie.match ( '(^|;) ?' + cookie_name + '=([^;]*)(;|$)' );
+            if ( results )
+                return ( unescape ( results[2] ) );
+            else
+                return null;
+        }
+    </script>
+</div>
+
+<header>
+  <ul class="navbar">
+    <li><a href="#">Item 1</a></li>
+    <li><a href="#">Item 2</a></li>
+    <li><a href="#">Item 3</a></li>
+    <li><a href="#">Item 4</a></li>
+  </ul>
+</header>
+
+<footer>This is the footer</footer>
+
+</body>
+</html>

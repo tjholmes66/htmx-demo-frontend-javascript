@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/form_style.css">
+    <title>HTMX Demo - Company List</title>
+</head>
+<body>
+
+<button><a href='company_create.html'>Add Button</a></button><br/>
+
+<table id="company-list">
+    <thead>
+         <tr>
+            <th>Active</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Address1</th>
+            <th>Address2</th>
+            <th>City</th>
+            <th>State</th>
+            <th>zip</th>
+         </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script>
+        const apiUrl = 'http://localhost:8080/rest/companys';
+
+        fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+        const tableBody = document.querySelector('#company-list tbody');
+
+        data.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+                        <td>${item.active}</td>
+                        <td>${item.companyCode}</td>
+                        <td>${item.companyName}</td>
+                        <td>${item.description}</td>
+                        <td>${item.address1}</td>
+                        <td>${item.address2}</td>
+                        <td>${item.city}</td>
+                        <td>${item.state}</td>
+                        <td>${item.zip}</td>
+                    `;
+        tableBody.appendChild(row);
+    });
+    })
+        .catch(error => console.error('Error fetching data:', error));
+</script>
+
+</body>
+</html>
